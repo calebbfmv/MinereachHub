@@ -1,0 +1,15 @@
+announcement-interval: 10
+#The time (in seoonds) between messages
+
+#Messages to send, in order (Messages are send in descending order then restarts.
+announcements:
+- '&6Welcome %player% to Minereach!'
+
+db:
+  user: root
+  password: pass
+  port: 3306
+  database-name: Points
+  host: localhost
+sidebar:
+  name: '&6Minereach Games'
