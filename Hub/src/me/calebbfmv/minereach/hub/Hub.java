@@ -3,6 +3,7 @@ package me.calebbfmv.minereach.hub;
 import me.calebbfmv.minereach.hub.commands.PointsCommand;
 import me.calebbfmv.minereach.hub.db.Column;
 import me.calebbfmv.minereach.hub.db.MySQL;
+import me.calebbfmv.minereach.hub.gui.GlowEnchant;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -42,6 +43,7 @@ public class Hub extends JavaPlugin {
 			player.sendMessage("Luke is gay");
 		}
 		update();
+		GlowEnchant.register();
 	}
 
 	private void connect(){
