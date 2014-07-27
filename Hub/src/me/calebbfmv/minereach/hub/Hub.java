@@ -1,21 +1,22 @@
 package me.calebbfmv.minereach.hub;
 
+import me.calebbfmv.minereach.hub.commands.HelpMe;
 import me.calebbfmv.minereach.hub.commands.PointsCommand;
 import me.calebbfmv.minereach.hub.db.Column;
+import me.calebbfmv.minereach.hub.db.Economy;
 import me.calebbfmv.minereach.hub.db.MySQL;
 import me.calebbfmv.minereach.hub.gui.GlowEnchant;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class Hub extends JavaPlugin {
 	
 	private static Hub instance;
 	private MySQL sql;
 	private Sidebar bar;
+	private Economy econ;
 	private PlayerListener playerListener;
 	private String host, db, pass, user, port;
 	
@@ -29,6 +30,7 @@ public class Hub extends JavaPlugin {
 		new Announcements();
 		bar = new Sidebar();
 		new PointsCommand();
+		new HelpMe();
 		playerListener = new PlayerListener();
 		host = getConfig().getString("db.host");
 		db = getConfig().getString("db.database-name");
@@ -36,15 +38,13 @@ public class Hub extends JavaPlugin {
 		user = getConfig().getString("db.user");
 		port = getConfig().getString("db.port");
 		connect();
+		econ = new Economy();
 		for(World world : Bukkit.getWorlds()){
 			world.setStorm(false);
 		}
-		for(Player player :  Bukkit.getOnlinePlayers()){
-			player.sendMessage("Luke is gay");
-		}
-		update();
 		GlowEnchant.register();
 	}
+
 
 	private void connect(){
 		Thread thread = new Thread(new Runnable(){
@@ -62,6 +62,10 @@ public class Hub extends JavaPlugin {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Economy getEcon() {
+		return econ;
 	}
 
 	public MySQL getSql() {
@@ -94,19 +98,6 @@ public class Hub extends JavaPlugin {
 
 	public String getPort() {
 		return port;
-	}
-	
-	private void update(){
-		for(Player player : Bukkit.getOnlinePlayers()){
-			player.setScoreboard(getBoard().getBoard(player, playerListener.total));
-		}
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				System.out.println("Updating");
-				playerListener.sendRequest();
-			}
-		}.runTaskTimerAsynchronously(getInstance(), 0L, 20L);
 	}
 
 }

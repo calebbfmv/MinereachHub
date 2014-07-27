@@ -3,3 +3,4 @@ version: 1.0.0.banana
 main: me.calebbfmv.minereach.hub.Hub
 commands: 
   points:
+  helpme:

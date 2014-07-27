@@ -14,8 +14,10 @@ import org.bukkit.entity.Player;
 public class PointsCommand implements CommandExecutor {
 	
 	private Hub hub;
+	private Economy econ;
 	public PointsCommand(){
 		hub = Hub.getInstance();
+		econ = hub.getEcon();
 		hub.getCommand("points").setExecutor(this);
 	}
 
@@ -54,10 +56,10 @@ public class PointsCommand implements CommandExecutor {
 		Player p = Bukkit.getPlayerExact(player);
 		if(player == null){
 			OfflinePlayer offline = Bukkit.getOfflinePlayer(player);
-			Economy.addOffline(offline, amount);
+			econ.addOffline(offline, amount);
 			return;
 		}
-		Economy.addCoins(p.getUniqueId(), amount);
+		econ.addCoins(p.getUniqueId(), amount);
 		
 	}
 

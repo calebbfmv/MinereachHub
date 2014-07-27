@@ -73,7 +73,6 @@ public class MySQL extends Database {
         return connection;
     }
 
-
     @Override
     public void closeConnection() {
         if (connection != null) {

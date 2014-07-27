@@ -1,6 +1,5 @@
 package me.calebbfmv.minereach.hub;
 
-import me.calebbfmv.minereach.hub.db.Economy;
 import me.calebbfmv.minereach.hub.events.PointsUpdateEvent;
 
 import org.bukkit.Bukkit;
@@ -44,7 +43,7 @@ public class Sidebar implements Listener {
 		websiteString.setScore(11);
 		website.setScore(10);
 		Score pointString = obj.getScore(ChatColor.RED + ChatColor.BOLD.toString() + "Points");
-		int i = Economy.getCoins(player.getUniqueId());
+		int i = Hub.getInstance().getEcon().getCoins(player.getUniqueId());
 		String pp = String.valueOf(i);
 		if (i >= 1000) {
 			pp = pp.substring(0, 1) + "," + pp.substring(1);

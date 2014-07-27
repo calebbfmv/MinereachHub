@@ -23,7 +23,6 @@ public class PlayerListener implements PluginMessageListener {
 
 	@Override
 	public void onPluginMessageReceived(String channel, Player player, byte[] message) {
-		System.out.println("Called");
 		if (!channel.equals("BungeeCord")) {
 			total = Bukkit.getOfflinePlayers().length;
 			return;
@@ -35,8 +34,6 @@ public class PlayerListener implements PluginMessageListener {
 			total = in.readInt();
 			if(server.equalsIgnoreCase("ALL")){
 				for(Player p : Bukkit.getOnlinePlayers()){
-					player.sendMessage("u suk dock");
-					player.sendMessage(total + "");
 					Scoreboard board = Hub.getInstance().getBoard().getBoard(p, total);
 					p.setScoreboard(board);
 				}
@@ -45,8 +42,6 @@ public class PlayerListener implements PluginMessageListener {
 	}
 
 	public void sendRequest(){
-		System.out.println(total);
-		System.out.println("Sending");
 		ByteArrayOutputStream b = new ByteArrayOutputStream();
 		DataOutputStream out = new DataOutputStream(b);
 		try {
@@ -55,7 +50,6 @@ public class PlayerListener implements PluginMessageListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("sent");
 		first().sendPluginMessage(Hub.getInstance(), "BungeeCord", b.toByteArray());
 	}
 
